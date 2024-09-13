@@ -60,7 +60,7 @@ func PostNewRisk(w http.ResponseWriter, r *http.Request) {
 	}
 
 	risk := risk.NewRisk(incoming.Title, incoming.Description)
-	err = db.PutRisk(risk)
+	err = db.InsertRisk(risk)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return

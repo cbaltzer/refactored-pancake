@@ -6,6 +6,11 @@ import (
 	"risks-api/risk"
 )
 
+type InMemory struct {
+	risks   []risk.Risk
+	indexes map[string]int
+}
+
 func NewInMemoryStorage() InMemory {
 	return InMemory{
 		risks:   []risk.Risk{},
@@ -35,7 +40,7 @@ func (db *InMemory) GetRisk(id string) (*risk.Risk, error) {
 	return nil, fmt.Errorf("not found")
 }
 
-func (db *InMemory) PutRisk(r risk.Risk) error {
+func (db *InMemory) InsertRisk(r risk.Risk) error {
 	if _, ok := db.indexes[r.ID]; ok {
 		return fmt.Errorf("already exists")
 	}
